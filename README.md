@@ -90,6 +90,7 @@ The analysis combines traditional clustering, deep embedding representations, an
 ---
 
 ## Repository Structure
+```
 Retail-II-UCI-Customer-Purchase-Behavior-Analysis/
 ├── dataset/
 │ └── online_retail_ii.csv
@@ -99,7 +100,7 @@ Retail-II-UCI-Customer-Purchase-Behavior-Analysis/
 │ └── screenshots/
 ├── README.md
 └── requirements.txt
-
+```
 
 ---
 
