@@ -41,12 +41,13 @@ The analysis combines traditional clustering, deep embedding representations, an
    - Remove negative quantities (returns)
    - Remove cancelled invoices
 3. Feature engineering at customer level:
-   - Total spending
-   - Transaction count
+   - Total spending (log-transformed)
+   - Transaction count (log-transformed)
    - Average basket size
+   - Recency (days since last purchase)
 4. Apply clustering techniques:
-   - k-Means clustering
-   - Hierarchical clustering (Ward linkage)
+   - k-Means clustering (with parameter tuning: k=2-10)
+   - DBSCAN clustering (with eps parameter tuning)
 5. Evaluate clustering performance using silhouette scores
 6. Visualize customer clusters using PCA and t-SNE
 
@@ -63,11 +64,11 @@ The analysis combines traditional clustering, deep embedding representations, an
 
 ### **Part C: Association Rule Mining**
 1. Transform transactional data into basket format (Invoice → list of products)
-2. Construct binary transaction matrix
-3. Apply **FP-Growth** algorithm to identify frequent itemsets
-4. Generate association rules
+2. Construct binary transaction matrix (40,301 invoices × 5,469 products)
+3. Apply **FP-Growth** algorithm to identify frequent itemsets (1,056 itemsets found)
+4. Generate association rules (848 rules generated)
 5. Extract and rank the top 10 rules based on lift
-6. Interpret at least 3 strong association rules with business relevance
+6. Interpret 4 strong association rules with business relevance
 
 ---
 
@@ -105,17 +106,18 @@ Retail-II-UCI-Customer-Purchase-Behavior-Analysis/
 ---
 
 ## Key Outcomes
-- Identification of high-value, low-frequency, and bulk-buying customer segments
-- Improved cluster separation using autoencoder-based embeddings
-- Strong product associations useful for cross-selling and bundling
-- Practical marketing strategies based on data-driven insights
-
----
+- **Customer Segmentation**: Identified 3 k-Means clusters (Medium-value: 46.1%, Low-value: 53.8%, Bulk buyers: 0.05%)
+- **Clustering Performance**: 
+  - k-Means silhouette score: 0.4144
+  - DBSCAN silhouette score: 0.3186 (2 clusters, 101 noise points)
+  - Autoencoder embedding silhouette: 0.5768 (best performance)
+- **Association Rules**: Discovered 848 rules, top 10 with lift values 45-52
+- **Product Insights**: Strong associations in "Poppy's Playhouse" product line
 
 ## Business Recommendations
-1. Target high-value customers with loyalty programs and personalized offers
-2. Bundle frequently co-purchased products to increase basket size
-3. Re-engage low-frequency customers using targeted promotions
+1. **Cross-selling**: Bundle frequently co-purchased products (e.g., Poppy's Playhouse sets)
+2. **Loyalty Programs**: Target high-value customers (Cluster 0: 2,714 customers, £5,848 avg spending)
+3. **Targeted Discounts**: Segment-specific promotions based on cluster characteristics
 
 ---
 
